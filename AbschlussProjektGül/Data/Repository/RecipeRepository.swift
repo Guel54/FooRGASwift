@@ -1,9 +1,3 @@
-//
-//  RecipeRepository.swift
-//  AbschlussProjektGül
-//
-//  Created by Gül Köse on 18.12.24.
-//
 
 import Foundation
 

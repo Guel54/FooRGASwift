@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct AppNavigation: View {
-    //@ObservedObject var addRecipeViewModel: AddRecipeViewModel
+    @ObservedObject var addRecipeViewModel: AddRecipeViewModel
     
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house") {
-                //HomeView()
+                HomeView()
             }
             Tab("Favorite", systemImage: "heart") {
-                //FavoriteView()
+                FavoriteView()
             }
             Tab("Add Recipe", systemImage: "plus.circle") {
-                //AddRecipeView()
-                    //.environmentObject(addRecipeViewModel)  // Hier wird das addRecipeViewModel übergeben
+                AddRecipeView()
+                    .environmentObject(addRecipeViewModel)  // Hier wird das addRecipeViewModel übergeben
             }
             
             Tab("Settings", systemImage: "wrench") {
-                //SettingsView()
+                SettingsView()
             }
            
         }
@@ -32,5 +32,5 @@ struct AppNavigation: View {
 }
 
 #Preview {
-    AppNavigation()//addRecipeViewModel: AddRecipeViewModel()
+    AppNavigation(addRecipeViewModel: AddRecipeViewModel())
 }

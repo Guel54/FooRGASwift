@@ -1,10 +1,9 @@
-//
-//  Meal.swift
-//  AbschlussProjektGül
-//
-//  Created by Gül Köse on 18.12.24.
-//
 
+// Meal.swift
+// ProjektWoche2
+//
+// Created by Gül Köse on 26.11.24.
+//
 import SwiftUI
 import SwiftData
 
