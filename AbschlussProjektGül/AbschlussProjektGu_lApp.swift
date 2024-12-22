@@ -6,12 +6,36 @@
 //
 
 import SwiftUI
+import SwiftUI
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+    return true
+  }
+}
 
 @main
 struct AbschlussProjektGu_lApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
+    @StateObject private var recipeViewModel = RecipeViewModel()
+    @StateObject private var addRecipeViewModel = AddRecipeViewModel()
+    @StateObject private var weekPlannerViewModel = WeekPlannerViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           
+            AppNavigation()
+                .modelContainer(for: [WeekPlan.self], inMemory: true)
+            .environmentObject(recipeViewModel)
+            .environmentObject(addRecipeViewModel)
+            .environmentObject(weekPlannerViewModel)
+            .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

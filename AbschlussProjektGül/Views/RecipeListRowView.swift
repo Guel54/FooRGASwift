@@ -1,14 +1,16 @@
 import SwiftUI
+import SwiftData
 
 struct RecipeListRowView: View {
     var meal: Meal
     @State private var isLoading = true
     @Environment(\.modelContext) private var modelContext
-    
+    @EnvironmentObject private var weekPlannerViewModel: WeekPlannerViewModel
+    @State private var isAddingToWeekPlanner = false
+
     var body: some View {
         VStack(spacing: 16) {
-            
-            // Bild mit Favoriten-Button
+            // Bild mit Favoriten-Button und Kalender-Button
             if isLoading {
                 ProgressView()
                     .frame(height: 250)
@@ -22,10 +24,7 @@ struct RecipeListRowView: View {
                         .cornerRadius(20)
                         .clipped()
                         .overlay {
-                            // Überlagerung mit abgerundeten Ecken
                             ZStack {
-                                
-                                
                                 HStack {
                                     Spacer()
                                     Button {
@@ -38,7 +37,21 @@ struct RecipeListRowView: View {
                                             .background(Color.white.opacity(0.6))
                                             .clipShape(Circle())
                                     }
-                                    .offset(x: -1, y: -100)
+                                    .offset(x: 150, y: -90)
+
+                                    Spacer()
+                                    Button {
+                                        // Übergebe hier nur das `meal` und `date`
+                                        weekPlannerViewModel.addMealToDate(meal: meal, date: Date())
+                                    } label: {
+                                        Image(systemName: "calendar.badge.plus")
+                                            .font(.system(size: 30))
+                                            .foregroundColor(.blue)
+                                            .padding(10)
+                                            .background(Color.white.opacity(0.6))
+                                            .clipShape(Circle())
+                                    }
+                                    .offset(x: -5, y: -30)
                                 }
                             }
                         }
@@ -48,8 +61,6 @@ struct RecipeListRowView: View {
                         .bold()
                         .shadow(radius: 10)
                         .padding(.horizontal)
-                    
-                    
                 } placeholder: {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .gray))
@@ -70,9 +81,13 @@ struct RecipeListRowView: View {
             isLoading = false
         }
     }
-    
+
+    // Funktion zum Setzen des Favoritenstatus
     private func setFavorite(for meal: Meal) {
+        guard meal.isFavorite != !meal.isFavorite else { return } // Keine Aktion, wenn sich der Status nicht ändert
         meal.isFavorite.toggle()
+        
+        // Nur speichern, wenn sich der Status geändert hat
         modelContext.insert(meal)
         do {
             try modelContext.save()
@@ -95,6 +110,7 @@ struct RecipeListRowView_Previews: PreviewProvider {
             ingredient4: "Tomatensauce",
             ingredient5: "Käse"
         ))
+        .environmentObject(WeekPlannerViewModel()) // Beispiel für die Vorschau mit dem ViewModel
         .previewLayout(.sizeThatFits)
         .padding()
     }

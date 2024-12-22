@@ -1,14 +1,16 @@
 //
 //  AppNavigation.swift
-//  AbschlussProjektGül
+//  ProjektWoche2
 //
-//  Created by Gül Köse on 18.12.24.
+//  Created by Gül Köse on 26.11.24.
 //
+
 
 import SwiftUI
+import SwiftData
 
 struct AppNavigation: View {
-    @ObservedObject var addRecipeViewModel: AddRecipeViewModel
+    
     
     var body: some View {
         TabView {
@@ -18,19 +20,27 @@ struct AppNavigation: View {
             Tab("Favorite", systemImage: "heart") {
                 FavoriteView()
             }
+            
+            Tab("Wochenplaner", systemImage: "calendar") {
+                WeekPlannerView()
+                    
+            }
+            
             Tab("Add Recipe", systemImage: "plus.circle") {
                 AddRecipeView()
-                    .environmentObject(addRecipeViewModel)  // Hier wird das addRecipeViewModel übergeben
+                    
             }
             
             Tab("Settings", systemImage: "wrench") {
                 SettingsView()
             }
-           
+            
         }
     }
 }
 
 #Preview {
-    AppNavigation(addRecipeViewModel: AddRecipeViewModel())
+    AppNavigation()
+        
+    
 }

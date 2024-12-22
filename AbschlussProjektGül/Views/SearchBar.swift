@@ -15,7 +15,7 @@ struct SearchBar: View {
         ZStack {
               RoundedRectangle(cornerRadius: 50)
                 .frame(width: 350, height: 50)
-                .foregroundColor(Color.pink)
+                .foregroundColor(Color.purple)
                 .shadow(radius: 1)
                 .overlay(alignment: .trailing){
                   HStack {

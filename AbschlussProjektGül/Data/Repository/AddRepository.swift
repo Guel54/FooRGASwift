@@ -1,14 +1,16 @@
 //
-//  AddRecipeRepository.swift
-//  KopieTesting
+//  AddRepository.swift
+//  Test123
 //
-//  Created by Gül Köse on 15.12.24.
+//  Created by Gül Köse on 14.12.24.
 //
+
 
 import FirebaseFirestore
 
+
 class AddRecipeRepository {
-    private let database = FirebaseService.shared.database
+    private let database = Firestore.firestore()
 
     // Rezept hinzufügen
     func addRecipe(recipe: AddRecipe, completion: @escaping (Result<Void, Error>) -> Void) {
