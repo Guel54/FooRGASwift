@@ -104,7 +104,7 @@ struct ProfileView: View {
                 Spacer()
             }
             .padding()
-            .background(Color("Salbeigrün").ignoresSafeArea())
+            .background(Color("salbeiGrun").ignoresSafeArea())
             .navigationTitle("Profile")
         }
     }

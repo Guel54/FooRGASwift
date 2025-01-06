@@ -12,7 +12,7 @@ struct AddRecipeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.salbeigrün)
+                Color(.salbeiGrun)
                     .edgesIgnoringSafeArea(.all)
                 
                 ScrollView {
@@ -20,7 +20,7 @@ struct AddRecipeView: View {
                         Text("Rezept erstellen")
                             .font(.largeTitle)
                             .bold()
-                            .foregroundColor(.dunkelGrün)
+                            .foregroundColor(.dunkelGrun)
                             .padding(.horizontal)
                         
                         VStack(spacing: 15) {
@@ -31,7 +31,7 @@ struct AddRecipeView: View {
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                        .stroke(Color("dunkelGrun"), lineWidth: 1)
                                 )
                             TextEditor(text: $viewModel.description)
                                 .frame(height: 100)
@@ -47,7 +47,7 @@ struct AddRecipeView: View {
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                        .stroke(Color("dunkelGrun"), lineWidth: 1)
                                 )
                         }
                         .padding(.horizontal)
@@ -55,7 +55,7 @@ struct AddRecipeView: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Zutaten")
                                 .font(.headline)
-                                .foregroundColor(.dunkelGrün)
+                                .foregroundColor(.dunkelGrun)
                             
                             HStack {
                                 TextField("Neue Zutat hinzufügen", text: $newIngredient)
@@ -65,7 +65,7 @@ struct AddRecipeView: View {
                                     .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color.dunkelGrün, lineWidth: 1)
+                                            .stroke(Color.dunkelGrun, lineWidth: 1)
                                     )
                                 Button(action: {
                                     if !newIngredient.isEmpty {
@@ -92,7 +92,7 @@ struct AddRecipeView: View {
                                         ingredients.removeAll { $0 == ingredient }
                                     }) {
                                         Image(systemName: "trash")
-                                            .foregroundColor(Color("dunkelGrün"))
+                                            .foregroundColor(Color("dunkelGrun"))
                                     }
                                 }
                                 .padding(8)
@@ -112,14 +112,14 @@ struct AddRecipeView: View {
                                 .padding()
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                        .stroke(Color.dunkelGrun, lineWidth: 1)
                                 )
                                 .background(
                                     LinearGradient(
                                         gradient: Gradient(colors: [
-                                            Color("olivegrün"),
-                                            Color("dunkelGrün"),
-                                            Color("Salbeigrün")
+                                            Color("oliveGrun"),
+                                            Color("dunkelGrun"),
+                                            Color("salbeiGrun")
                                         ]),
                                         startPoint: .leading,
                                         endPoint: .trailing

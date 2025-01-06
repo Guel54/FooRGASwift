@@ -32,7 +32,7 @@ struct RecipeListRowView: View {
                                     } label: {
                                         Image(systemName: meal.isFavorite ? "heart.fill" : "heart")
                                             .font(.system(size: 30))
-                                            .foregroundColor(Color("hellGrün"))
+                                            .foregroundColor(Color("hellGrun"))
                                             .padding(10)
                                             .background(Color("dunkelGelb").opacity(0.6))
                                             .clipShape(Circle())
@@ -50,7 +50,7 @@ struct RecipeListRowView: View {
                                     } label: {
                                         Image(systemName: "calendar.badge.plus")
                                             .font(.system(size: 30))
-                                            .foregroundColor(Color("hellGrün"))
+                                            .foregroundColor(Color("hellGrun"))
                                             .padding(10)
                                             .background(Color("dunkelGelb").opacity(0.6))
                                             .clipShape(Circle())

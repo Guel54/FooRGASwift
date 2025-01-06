@@ -15,6 +15,12 @@ Die App soll eine zentrale Anlaufstelle für alle sein, die gerne kochen, neue G
 - Unterstützung bei der Mahlzeitenplanung für die Woche.
 - Benutzerfreundliche Anpassung der Einstellungen.
 
+
+##Problemlösung?!!
+##Zukunft was es noch könnte?!!Aussicht
+
+
+
 ## Features
 
 ### 1. Rezeptsuche

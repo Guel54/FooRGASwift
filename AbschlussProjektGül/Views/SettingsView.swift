@@ -7,7 +7,7 @@ struct SettingsView: View {
         NavigationView {
             List {
                 // Account Section
-                Section(header: Text("Account").foregroundColor(.dunkelGrün)) {
+                Section(header: Text("Account").foregroundStyle(Color("dunkelGrun"))) {
                     NavigationLink(destination: EditProfileView()) {
                         Label("Edit Profile", systemImage: "person.circle")
                     }
@@ -15,33 +15,33 @@ struct SettingsView: View {
                     Label("Notifications", systemImage: "bell")
                     Label("Privacy", systemImage: "lock")
                 }
-                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Support & About Section
-                Section(header: Text("Support & About").foregroundColor(.dunkelGrün)) {
+                Section(header: Text("Support & About").foregroundStyle(Color("dunkelGrun"))) {
                     Label("My Subscription", systemImage: "creditcard")
                     Label("Help & Support", systemImage: "questionmark.circle")
                     Label("Terms and Policies", systemImage: "info.circle")
                 }
-                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Cache & Cellular Section
-                Section(header: Text("Cache & Cellular").foregroundColor(.dunkelGrün)) {
+                Section(header: Text("Cache & Cellular").foregroundStyle(Color("dunkelGrun"))) {
                     Label("Free up Space", systemImage: "trash")
                     Label("Data Saver", systemImage: "arrow.2.squarepath")
                 }
-                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Actions Section
-                Section(header: Text("Actions").foregroundColor(.dunkelGrün)) {
+                Section(header: Text("Actions").foregroundStyle(Color("dunkelGrun"))) {
                     Label("Report a Problem", systemImage: "exclamationmark.bubble")
                     Label("Add Account", systemImage: "person.badge.plus")
                     Label("Log Out", systemImage: "arrowshape.turn.up.left")
                 }
-                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                .listRowBackground(Color("salbeiGrun").opacity(0.2))
             }
             .scrollContentBackground(.hidden) // Verhindert, dass der Hintergrund der Liste standardmäßig weiß ist
-            .background(Color("Salbeigrün").ignoresSafeArea())
+            .background(Color("salbeiGrun").ignoresSafeArea())
             .navigationTitle("Settings")
             .foregroundColor(.dunkelGelb)
         }
@@ -121,7 +121,7 @@ struct EditProfileView: View {
                     }
                 }
             }
-            .listRowBackground(Color("Salbeigrün").opacity(0.2))
+            .listRowBackground(Color("salbeiGrun").opacity(0.2))
             
             // Änderungen speichern
             Section {
@@ -138,10 +138,10 @@ struct EditProfileView: View {
                         .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
                 }
             }
-            .listRowBackground(Color("Salbeigrün").opacity(0.2))
+            .listRowBackground(Color("salbeiGrun").opacity(0.2))
         }
         .scrollContentBackground(.hidden) // Verhindert, dass der Hintergrund des Formulars standardmäßig weiß ist
-        .background(Color("Salbeigrün").ignoresSafeArea())
+        .background(Color("salbeiGrun").ignoresSafeArea())
         .navigationTitle("Edit Profile")
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(selectedImage: $profileImage)

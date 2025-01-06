@@ -56,7 +56,7 @@ struct HomeView: View {
                     })
                 }
             }
-            .background(Color("Salbeigrün"))
+            .background(Color("salbeiGrun"))
         }
     }
 }

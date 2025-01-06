@@ -18,14 +18,14 @@ struct WeekPlannerView: View {
                     selection: $selectedDates
                 )
                 .datePickerStyle(GraphicalDatePickerStyle())
-                .background(Color(UIColor(named: "Salbeigrün") ?? .green)) // Salbeigrün-Hintergrund
+                .background(Color(UIColor(named: "salbeiGrun") ?? .green)) // Salbeigrün-Hintergrund
                 .cornerRadius(10)
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.dunkelGrün, lineWidth: 2) // Randfarbe
+                        .stroke(Color.dunkelGrun, lineWidth: 2) // Randfarbe
                 )
-                .tint(Color.dunkelGrün) // Setzt die grünen Navigationselemente
+                .tint(Color.dunkelGrun) // Setzt die grünen Navigationselemente
                 .padding()
                 
                 List {
@@ -34,7 +34,7 @@ struct WeekPlannerView: View {
                             VStack(alignment: .leading) {
                                 Text(formatDate(weekPlan.date))
                                     .font(.headline)
-                                    .foregroundColor(Color.olivegrün)
+                                    .foregroundColor(Color.oliveGrun)
                                 Text(weekPlan.day)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
@@ -66,7 +66,7 @@ struct WeekPlannerView: View {
                     }
                 }
                 .navigationTitle("Wochenplaner")
-                .foregroundColor(Color.dunkelGrün)
+                .foregroundStyle(Color("dunkelGrun"))
                 
                 if !selectedDates.isEmpty {
                     Button("Mahlzeit auswählen") {
@@ -74,7 +74,7 @@ struct WeekPlannerView: View {
                     }
                     .padding()
                     .background(
-                     LinearGradient(gradient: Gradient(colors: [Color.dunkelGrün, Color.olivegrün, Color.salbeigrün]), startPoint: .leading, endPoint: .trailing)
+                     LinearGradient(gradient: Gradient(colors: [Color.dunkelGrun, Color.oliveGrun, Color.salbeiGrun]), startPoint: .leading, endPoint: .trailing)
                     )
                     .foregroundColor(.white)
                     .cornerRadius(8)

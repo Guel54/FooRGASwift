@@ -6,7 +6,7 @@ struct AddRecipeListView: View {
     var body: some View {
         ZStack {
             // Hintergrundfarbe
-            Color("Salbeigrün")
+            Color("salbeiGrun")
                 .ignoresSafeArea()
             
             List {

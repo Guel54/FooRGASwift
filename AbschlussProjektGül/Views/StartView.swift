@@ -36,7 +36,7 @@ struct StartView: View {
                        .foregroundColor(.white)
                        .frame(width: 300, height: 50)
                        .background(
-                        LinearGradient(gradient: Gradient(colors: [Color.dunkelGrün, Color.olivegrün, Color.salbeigrün]), startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(gradient: Gradient(colors: [Color.dunkelGrun, Color.oliveGrun, Color.salbeiGrun]), startPoint: .leading, endPoint: .trailing)
                        )
                        .cornerRadius(15)
                        .shadow(radius: 5)

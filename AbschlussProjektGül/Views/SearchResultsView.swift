@@ -7,14 +7,14 @@ struct SearchResultsView: View {
     var body: some View {
         ZStack {
             // Hintergrundfarbe
-            Color("Salbeigrün")
+            Color("salbeiGrun")
                 .ignoresSafeArea() // Deckt den gesamten Hintergrund ab
             
             VStack {
                 Text("Results for \"\(searchText)\"")
                     .font(.largeTitle)
                     .shadow(radius: 10)
-                    .foregroundColor(Color("dunkelGrün"))
+                    .foregroundColor(Color("dunkelGrun"))
                     .bold()
                     .padding()
                 

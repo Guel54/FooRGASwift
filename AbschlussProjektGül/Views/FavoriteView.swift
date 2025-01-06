@@ -11,7 +11,7 @@ struct FavoriteView: View {
         NavigationView {
             ZStack {
                 // Hintergrundfarbe
-                Color("Salbeigrün")
+                Color("salbeiGrun")
                     .ignoresSafeArea()
                 
                 // Inhalt der Liste

@@ -8,14 +8,14 @@ struct DetailView: View {
         // Konfiguration der NavigationBar-Appearance
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor(Color("dunkelGrün"))] // Setzt die Titel-Farbe
+        appearance.titleTextAttributes = [.foregroundColor: UIColor(Color("dunkelGrun"))] // Setzt die Titel-Farbe
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var body: some View {
         ZStack {
-            Color("Salbeigrün")
+            Color("salbeiGrun")
                 .ignoresSafeArea()
             ScrollView {
                 VStack(spacing: 20) {

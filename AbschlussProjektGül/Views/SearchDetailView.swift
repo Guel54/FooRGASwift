@@ -7,7 +7,7 @@ struct SearchDetailView: View {
     
     var body: some View {
         ZStack {
-            Color("Salbeigrün")
+            Color("salbeiGrun")
                 .ignoresSafeArea()
             ScrollView {
                 VStack(spacing: 16) {

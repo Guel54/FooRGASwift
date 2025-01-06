@@ -8,6 +8,10 @@ struct AppNavigation: View {
     
     var body: some View {
         TabView {
+            Tab("Start", systemImage: "house") {
+                StartView()
+            }
+            
             Tab("Home", systemImage: "house") {
                 HomeView()
             }
