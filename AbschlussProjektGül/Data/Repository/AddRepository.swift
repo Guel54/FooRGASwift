@@ -1,9 +1,3 @@
-//
-//  AddRepository.swift
-//  Test123
-//
-//  Created by Gül Köse on 14.12.24.
-//
 
 
 import FirebaseFirestore

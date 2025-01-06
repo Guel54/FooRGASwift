@@ -1,16 +1,10 @@
-//
-//  AppNavigation.swift
-//  ProjektWoche2
-//
-//  Created by Gül Köse on 26.11.24.
-//
 
 
 import SwiftUI
 import SwiftData
 
 struct AppNavigation: View {
-    
+    @EnvironmentObject var weekPlannerViewModel: WeekPlannerViewModel
     
     var body: some View {
         TabView {
@@ -23,7 +17,7 @@ struct AppNavigation: View {
             
             Tab("Wochenplaner", systemImage: "calendar") {
                 WeekPlannerView()
-                    
+                    .environmentObject(weekPlannerViewModel)
             }
             
             Tab("Add Recipe", systemImage: "plus.circle") {
@@ -32,15 +26,14 @@ struct AppNavigation: View {
             }
             
             Tab("Settings", systemImage: "wrench") {
-                SettingsView()
+                ProfileView()
             }
-            
         }
     }
 }
 
 #Preview {
     AppNavigation()
-        
-    
+        .environmentObject(WeekPlannerViewModel())
+
 }

@@ -1,11 +1,5 @@
-//
-//  SearchBar.swift
-//  ProjektWoche2
-//
-//  Created by Shorena Polyeva on 27.11.24.
-//
-
 import SwiftUI
+
 
 struct SearchBar: View {
     @Binding var searchText: String
@@ -13,27 +7,32 @@ struct SearchBar: View {
     
     var body: some View {
         ZStack {
-              RoundedRectangle(cornerRadius: 50)
-                .frame(width: 350, height: 50)
-                .foregroundColor(Color.purple)
+            
+            RoundedRectangle(cornerRadius: 50)
+                .foregroundColor(Color("search"))
                 .shadow(radius: 1)
-                .overlay(alignment: .trailing){
-                  HStack {
-                      TextField("Search", text: $searchText)
-                          .foregroundColor(.black)
-                          .padding(.horizontal, 30)
-                    Spacer()
-                    Button{
-                        onSearchTapped?()
-                    } label: {
-                      Image(systemName: "magnifyingglass.circle.fill")
-                    }
-                    .font(.system(size: 40))
-                    .foregroundColor(Color.gray)
-                    .padding(.horizontal, 5)
-                  }
+                .frame(height: 50)
+                .padding(.horizontal)
+            HStack {
+                TextField("Search", text: $searchText)
+                    .foregroundColor(.black)
+                    .padding(.leading, 20)
+                
+                Spacer()
+                
+                Button {
+                    onSearchTapped?()
+                } label: {
+                    Image(systemName: "magnifyingglass.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(Color("dunkelGelb"))
                 }
+                .padding(.trailing, 15)
+                .accessibilityLabel("Start search")
             }
+            .padding(.horizontal, 10)
+        }
+        .frame(maxWidth: .infinity) 
     }
 }
 

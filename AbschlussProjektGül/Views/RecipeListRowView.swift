@@ -7,7 +7,7 @@ struct RecipeListRowView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var weekPlannerViewModel: WeekPlannerViewModel
     @State private var isAddingToWeekPlanner = false
-
+    
     var body: some View {
         VStack(spacing: 16) {
             // Bild mit Favoriten-Button und Kalender-Button
@@ -32,13 +32,17 @@ struct RecipeListRowView: View {
                                     } label: {
                                         Image(systemName: meal.isFavorite ? "heart.fill" : "heart")
                                             .font(.system(size: 30))
-                                            .foregroundColor(.red)
+                                            .foregroundColor(Color("hellGrün"))
                                             .padding(10)
-                                            .background(Color.white.opacity(0.6))
+                                            .background(Color("dunkelGelb").opacity(0.6))
                                             .clipShape(Circle())
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color("DarkGrayText"), lineWidth: 2)
+                                            )
                                     }
                                     .offset(x: 150, y: -90)
-
+                                    
                                     Spacer()
                                     Button {
                                         // Übergebe hier nur das `meal` und `date`
@@ -46,10 +50,14 @@ struct RecipeListRowView: View {
                                     } label: {
                                         Image(systemName: "calendar.badge.plus")
                                             .font(.system(size: 30))
-                                            .foregroundColor(.blue)
+                                            .foregroundColor(Color("hellGrün"))
                                             .padding(10)
-                                            .background(Color.white.opacity(0.6))
+                                            .background(Color("dunkelGelb").opacity(0.6))
                                             .clipShape(Circle())
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color("DarkGrayText"), lineWidth: 2)
+                                            )
                                     }
                                     .offset(x: -5, y: -30)
                                 }
@@ -57,7 +65,7 @@ struct RecipeListRowView: View {
                         }
                     Text(meal.name)
                         .font(.title2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.black)
                         .bold()
                         .shadow(radius: 10)
                         .padding(.horizontal)
@@ -73,7 +81,7 @@ struct RecipeListRowView: View {
         .padding(.vertical)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
+                .fill(Color("LightGrayBackground"))
                 .shadow(radius: 5)
         )
         .padding(.horizontal)
@@ -81,22 +89,20 @@ struct RecipeListRowView: View {
             isLoading = false
         }
     }
-
+    
     // Funktion zum Setzen des Favoritenstatus
     private func setFavorite(for meal: Meal) {
-        guard meal.isFavorite != !meal.isFavorite else { return } // Keine Aktion, wenn sich der Status nicht ändert
         meal.isFavorite.toggle()
-        
-        // Nur speichern, wenn sich der Status geändert hat
         modelContext.insert(meal)
         do {
             try modelContext.save()
         } catch {
-            print("Error saving favorite state: \(error)")
+            print("Fehler beim Speichern des Favoritenstatus: \(error)")
+            // Optional: Benutzer über einen Alert informieren
         }
     }
+    
 }
-
 struct RecipeListRowView_Previews: PreviewProvider {
     static var previews: some View {
         RecipeListRowView(meal: Meal(

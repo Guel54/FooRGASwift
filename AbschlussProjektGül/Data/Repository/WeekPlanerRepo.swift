@@ -2,8 +2,7 @@
 import SwiftData
 import SwiftUI
 
-import SwiftData
-import SwiftUI
+
 
 class WeekPlannerRepository {
 

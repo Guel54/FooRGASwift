@@ -1,20 +1,3 @@
-//
-//  AddRecipe.swift
-//  Test123
-//
-//  Created by Gül Köse on 14.12.24.
-//
-
-
-///mit User ID brauche ich den code hier
-//struct AddRecipe: Identifiable, Codable {
-//    @DocumentID var id: String? // Firebase Firestore ID
-//    var userId: String
-//    var title: String
-//    var description: String
-//    var imageURL: String? // Optionales Bild-URL-Feld
-//
-//}
 
 
 

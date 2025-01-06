@@ -2,46 +2,54 @@ import SwiftUI
 import SwiftData
 
 struct FavoriteView: View {
-    @Query(filter: #Predicate<Meal> {$0.isFavorite}, sort: \Meal.name, order: .forward) private var meals: [Meal]
-    
+    @Query(filter: #Predicate<Meal> { $0.isFavorite }, sort: \Meal.name, order: .forward) private var meals: [Meal]
     @Environment(\.modelContext) private var modelContext
     @State private var showErrorAlert = false
     @State private var errorMessage = ""
-
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(meals) { meal in
-                    // NavigationLink für die Detailansicht
-                    NavigationLink(destination: FavoriteDetailView(meal: meal)) {
-                        HStack {
-                            AsyncImage(url: URL(string: meal.image)) { image in
-                                image.resizable()
-                                    .scaledToFit()
-                                    .frame(width: 50, height: 50)
-                                    .cornerRadius(10)
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 50, height: 50)
-                                    .cornerRadius(10)
+            ZStack {
+                // Hintergrundfarbe
+                Color("Salbeigrün")
+                    .ignoresSafeArea()
+                
+                // Inhalt der Liste
+                List {
+                    ForEach(meals) { meal in
+                        NavigationLink(destination: FavoriteDetailView(meal: meal)) {
+                            
+                            HStack {
+                                AsyncImage(url: URL(string: meal.image)) { image in
+                                    image.resizable()
+                                        .scaledToFill()
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle()) // Runde Bilder
+                                        .shadow(radius: 4) // Schatteneffekt
+                                } placeholder: {
+                                    ProgressView()
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle())
+                                }
+                                Text(meal.name)
+                                    .font(.headline)
+                                    .padding(.leading, 8)
                             }
-
-                            Text(meal.name)
-                                .font(.headline)
-                                .padding(.leading, 8)
+                            .padding(.vertical, 8)
                         }
-                        .padding(.vertical, 8)
                     }
+                    .onDelete(perform: deleteMeal)
                 }
-                .onDelete(perform: deleteMeal)
+                .scrollContentBackground(.hidden) // Verhindert graue Hintergründe in der Liste
             }
             .navigationTitle("Favoriten")
+            
             .alert(isPresented: $showErrorAlert) {
                 Alert(title: Text("Fehler"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
         }
     }
-
+    
     private func setFavorite(for meal: Meal) {
         meal.isFavorite.toggle()
         do {
@@ -64,7 +72,6 @@ struct FavoriteView: View {
         }
     }
 }
-
 
 #Preview {
     FavoriteView()

@@ -8,6 +8,8 @@ struct WeekPlannerView: View {
     @State private var isSelectingRecipe = false
     @State private var selectedDates: Set<DateComponents> = []
     
+    
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -16,6 +18,14 @@ struct WeekPlannerView: View {
                     selection: $selectedDates
                 )
                 .datePickerStyle(GraphicalDatePickerStyle())
+                .background(Color(UIColor(named: "Salbeigrün") ?? .green)) // Salbeigrün-Hintergrund
+                .cornerRadius(10)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.dunkelGrün, lineWidth: 2) // Randfarbe
+                )
+                .tint(Color.dunkelGrün) // Setzt die grünen Navigationselemente
                 .padding()
                 
                 List {
@@ -24,6 +34,7 @@ struct WeekPlannerView: View {
                             VStack(alignment: .leading) {
                                 Text(formatDate(weekPlan.date))
                                     .font(.headline)
+                                    .foregroundColor(Color.olivegrün)
                                 Text(weekPlan.day)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
@@ -40,21 +51,31 @@ struct WeekPlannerView: View {
                                 isSelectingRecipe = true
                             }
                             .padding(5)
-                            .background(Color.blue)
+                            .background(Color.dunkelGelb)
                             .foregroundColor(.white)
                             .cornerRadius(8)
                         }
                         .padding(.vertical, 8)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                weekPlannerViewModel.deleteWeekPlan(weekPlan)
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                        }
                     }
                 }
                 .navigationTitle("Wochenplaner")
+                .foregroundColor(Color.dunkelGrün)
                 
                 if !selectedDates.isEmpty {
-                    Button("Mahlzeit für ausgewählte Tage wählen") {
+                    Button("Mahlzeit auswählen") {
                         isSelectingRecipe = true
                     }
                     .padding()
-                    .background(Color.blue)
+                    .background(
+                     LinearGradient(gradient: Gradient(colors: [Color.dunkelGrün, Color.olivegrün, Color.salbeigrün]), startPoint: .leading, endPoint: .trailing)
+                    )
                     .foregroundColor(.white)
                     .cornerRadius(8)
                     .padding(.horizontal)
@@ -87,4 +108,3 @@ struct WeekPlannerView: View {
         return formatter.string(from: date)
     }
 }
-

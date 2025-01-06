@@ -1,29 +1,48 @@
-//
-//  AddRecipeListView.swift
-//  KopieTesting
-//
-//  Created by Gül Köse on 15.12.24.
-//
-
 import SwiftUI
 
 struct AddRecipeListView: View {
     @ObservedObject var viewModel: AddRecipeViewModel
 
     var body: some View {
-        List {
-            ForEach(viewModel.recipes) { recipe in
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(recipe.title)
-                        .font(.headline)
-                        .foregroundColor(.pink)
-                    Text(recipe.description)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+        ZStack {
+            // Hintergrundfarbe
+            Color("Salbeigrün")
+                .ignoresSafeArea()
+            
+            List {
+                ForEach(viewModel.recipes) { recipe in
+                    HStack {
+                        // Platzhalter für ein Rezeptbild (optional)
+                        Circle()
+                            .fill(Color("dunkelGelb"))
+                            .frame(width: 60, height: 60)
+                            .overlay(
+                                Text(recipe.title.prefix(1)) // Erster Buchstabe des Titels
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            )
+                            .shadow(radius: 4)
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            // Titel des Rezepts
+                            Text(recipe.title)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                                .shadow(radius: 1)
+
+                            // Beschreibung des Rezepts
+                            Text(recipe.description)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(.leading, 8)
+                    }
+                    .padding(.vertical, 8)
                 }
-                .padding(8)
+                .onDelete(perform: viewModel.deleteRecipe)
             }
-            .onDelete(perform: viewModel.deleteRecipe)
+            .listStyle(PlainListStyle())
+            .scrollContentBackground(.hidden) // Verhindert graue Hintergründe in der Liste
         }
         .navigationTitle("Gespeicherte Rezepte")
         .navigationBarTitleDisplayMode(.inline)
@@ -35,12 +54,9 @@ struct AddRecipeListView_Previews: PreviewProvider {
     static var previews: some View {
         let mockViewModel = AddRecipeViewModel()
         mockViewModel.recipes = [
-            AddRecipe(userId: "123", title: "Pfannkuchen", description: "Lecker und fluffig."),
-            AddRecipe(userId: "456", title: "Spaghetti Bolognese", description: "Herzhaft und sättigend."),
-            AddRecipe(userId: "789", title: "Salat Bowl", description: "Gesund und frisch.")
+            AddRecipe(userId: "123", title: "Pfannkuchen", description: "Leckere goldbraune Pfannkuchen."),
+            AddRecipe(userId: "456", title: "Salat", description: "Frischer Salat mit Dressing."),
         ]
-        return NavigationView {
-            AddRecipeListView(viewModel: mockViewModel)
-        }
+        return AddRecipeListView(viewModel: mockViewModel)
     }
 }

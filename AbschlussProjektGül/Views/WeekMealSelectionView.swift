@@ -27,6 +27,7 @@ struct WeekMealSelectionView: View {
                                 AsyncImage(url: URL(string: meal.image)) { image in
                                     image.resizable()
                                         .scaledToFit()
+                                        .shadow(radius: 10)
                                         .frame(width: 50, height: 50)
                                         .clipShape(Circle())
                                 } placeholder: {

@@ -6,23 +6,22 @@
 //
 
 import SwiftUI
-import SwiftUI
 import FirebaseCore
+import SwiftData
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        
+        return true
+    }
 }
-
 @main
 struct AbschlussProjektGu_lApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
-    
     @StateObject private var recipeViewModel = RecipeViewModel()
     @StateObject private var addRecipeViewModel = AddRecipeViewModel()
     @StateObject private var weekPlannerViewModel = WeekPlannerViewModel()

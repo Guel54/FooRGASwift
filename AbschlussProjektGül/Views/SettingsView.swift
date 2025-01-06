@@ -1,137 +1,154 @@
-//
-//  SettingsView.swift
-//  ProjektWoche2
-//
-//  Created by Gül Köse on 28.11.24.
-//
 import SwiftUI
 
 struct SettingsView: View {
-    // Benutzer- und Benachrichtigungseinstellungen
+    @State private var showEditProfile = false
+    
+    var body: some View {
+        NavigationView {
+            List {
+                // Account Section
+                Section(header: Text("Account").foregroundColor(.dunkelGrün)) {
+                    NavigationLink(destination: EditProfileView()) {
+                        Label("Edit Profile", systemImage: "person.circle")
+                    }
+                    Label("Security", systemImage: "shield")
+                    Label("Notifications", systemImage: "bell")
+                    Label("Privacy", systemImage: "lock")
+                }
+                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                
+                // Support & About Section
+                Section(header: Text("Support & About").foregroundColor(.dunkelGrün)) {
+                    Label("My Subscription", systemImage: "creditcard")
+                    Label("Help & Support", systemImage: "questionmark.circle")
+                    Label("Terms and Policies", systemImage: "info.circle")
+                }
+                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                
+                // Cache & Cellular Section
+                Section(header: Text("Cache & Cellular").foregroundColor(.dunkelGrün)) {
+                    Label("Free up Space", systemImage: "trash")
+                    Label("Data Saver", systemImage: "arrow.2.squarepath")
+                }
+                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+                
+                // Actions Section
+                Section(header: Text("Actions").foregroundColor(.dunkelGrün)) {
+                    Label("Report a Problem", systemImage: "exclamationmark.bubble")
+                    Label("Add Account", systemImage: "person.badge.plus")
+                    Label("Log Out", systemImage: "arrowshape.turn.up.left")
+                }
+                .listRowBackground(Color("Salbeigrün").opacity(0.2))
+            }
+            .scrollContentBackground(.hidden) // Verhindert, dass der Hintergrund der Liste standardmäßig weiß ist
+            .background(Color("Salbeigrün").ignoresSafeArea())
+            .navigationTitle("Settings")
+            .foregroundColor(.dunkelGelb)
+        }
+    }
+}
+
+struct EditProfileView: View {
     @AppStorage("username") private var username: String = "Guest"
-    @AppStorage("userEmail") private var userEmail: String = ""
-    @AppStorage("birthDate") private var birthDate: Date = Date()
+    @AppStorage("userEmail") private var userEmail: String = "guest@example.com"
 
-    @AppStorage("notificationsEnabled") private var notificationsEnabled: Bool = false
-    @AppStorage("notificationTypes") private var notificationTypes: String = "All"
-    
-    // Dark Mode und Spracheinstellungen
-    @AppStorage("isDarkMode") private var isDarkMode = false
-    @AppStorage("appLanguage") private var appLanguage = "Deutsch"
-    
-    // Lokale Variablen
-    @State private var notificationEnabled = true
-    @State private var showNotificationOptions = false
-    @State private var showPrivacyPolicy = false  // Neue Variable für das Sheet
-    
-    // Unterstützte Sprachen
-    let languages = ["Deutsch", "Englisch", "Französisch", "Spanisch"]
-    
+    @State private var password: String = "********"
+    @State private var dateOfBirth = Date()
+    @State private var selectedCountry = "Nigeria"
+    @State private var profileImage: UIImage?
+    @State private var showImagePicker = false
+
+    let countries = ["Türkei", "Germany", "USA", "France", "India"]
+
     var body: some View {
-        NavigationView {
-            Form {
-                // Profil Einstellungen
-                Section(header: Text("Profile")) {
-                    TextField("Username", text: $username)
-                    TextField("Email", text: $userEmail)
-                        .keyboardType(.emailAddress)
-                    DatePicker("Birth Date", selection: $birthDate, displayedComponents: .date)
-                }
-                
-                // Benachrichtigungen
-                Section(header: Text("Benachrichtigungen")) {
-                    Toggle("Enable Notifications", isOn: $notificationsEnabled)
-                    
-                    Button(action: {
-                        showNotificationOptions = true
-                    }) {
-                        Text("Notification Types")
-                    }
-                    .alert(isPresented: $showNotificationOptions) {
-                        Alert(
-                            title: Text("Choose Notification Types"),
-                            message: Text("Select which types of notifications you want to receive."),
-                            primaryButton: .default(Text("All")) {
-                                notificationTypes = "All"
-                            },
-                            secondaryButton: .default(Text("Only Important")) {
-                                notificationTypes = "Important Only"
+        Form {
+            // Profilbild
+            Section {
+                HStack {
+                    Spacer()
+                    VStack {
+                        if let profileImage = profileImage {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
+                                .overlay(
+                                    Image(systemName: "camera")
+                                        .padding(6)
+                                        .background(Color.white)
+                                        .clipShape(Circle())
+                                        .offset(x: 35, y: 35)
+                                )
+                        } else {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.gray)
+                                .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
+                                .overlay(
+                                    Image(systemName: "camera")
+                                        .padding(6)
+                                        .background(Color.white)
+                                        .clipShape(Circle())
+                                        .offset(x: 35, y: 35)
+                                )
+                        }
+                        Text("Change Photo")
+                            .foregroundColor(.dunkelGelb)
+                            .font(.caption)
+                            .onTapGesture {
+                                showImagePicker = true
                             }
-                        )
                     }
+                    Spacer()
                 }
-                
-                // Allgemeine Einstellungen
-                Section(header: Text("Allgemein")) {
-                    Toggle("Dunkelmodus aktivieren", isOn: $isDarkMode)
-                        .onChange(of: isDarkMode) { _ in
-                            updateTheme()
-                        }
-                    
-                    Picker("Sprache", selection: $appLanguage) {
-                        ForEach(languages, id: \.self) { language in
-                            Text(language)
-                        }
-                    }
-                }
-                
-                // Über die App
-                Section(header: Text("Über die App")) {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("1.0.0").foregroundColor(.gray)
-                    }
-                    Button("Datenschutzrichtlinien") {
-                        showPrivacyPolicy = true  // Sheet anzeigen, wenn der Button geklickt wird
-                    }
-                    .sheet(isPresented: $showPrivacyPolicy) {
-                        PrivacyPolicyView()  // Das neue View für die Datenschutzrichtlinien
+            }
+            
+            // Persönliche Informationen
+            Section(header: Text("Personal Information").foregroundColor(.white)) {
+                TextField("Name", text: $username)
+                    .foregroundColor(.white)
+                TextField("Email", text: $userEmail)
+                    .keyboardType(.emailAddress)
+                    .foregroundColor(.white)
+                SecureField("Password", text: $password)
+                    .foregroundColor(.white)
+                DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
+                Picker("Country/Region", selection: $selectedCountry) {
+                    ForEach(countries, id: \.self) { country in
+                        Text(country)
                     }
                 }
             }
-            .navigationTitle("Einstellungen")
-        }
-    }
-    
-    // Funktion, um das Theme zu aktualisieren
-    private func updateTheme() {
-        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        scene?.windows.first?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
-    }
-    
-    // Funktion, um Benachrichtigungen zu aktivieren oder zu deaktivieren
-    private func updateNotifications(enabled: Bool) {
-        // Hier könnte die Logik für das Aktivieren/Deaktivieren von Benachrichtigungen hinzugefügt werden
-        print("Benachrichtigungen sind jetzt \(enabled ? "aktiviert" : "deaktiviert")")
-    }
-}
-
-struct PrivacyPolicyView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Datenschutzrichtlinien")
-                    .font(.title)
-                    .padding()
-                
-                ScrollView {
-                    Text("Dummy-Text für die Datenschutzrichtlinien. Diese Richtlinien erklären, wie wir mit deinen persönlichen Daten umgehen. Deine Daten werden sicher und vertraulich behandelt, und du kannst jederzeit deine Zustimmung widerrufen.")
+            .listRowBackground(Color("Salbeigrün").opacity(0.2))
+            
+            // Änderungen speichern
+            Section {
+                Button(action: {
+                    // Änderungen sind automatisch durch @AppStorage gespeichert
+                    print("Changes saved!")
+                }) {
+                    Text("Save Changes")
+                        .frame(maxWidth: .infinity)
                         .padding()
-                        .foregroundColor(.gray)
-                        .font(.body)
+                        .background(Color.dunkelGelb)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
                 }
-                .padding()
-                
-                Spacer()
             }
-            .navigationTitle("Datenschutzrichtlinien")
+            .listRowBackground(Color("Salbeigrün").opacity(0.2))
+        }
+        .scrollContentBackground(.hidden) // Verhindert, dass der Hintergrund des Formulars standardmäßig weiß ist
+        .background(Color("Salbeigrün").ignoresSafeArea())
+        .navigationTitle("Edit Profile")
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(selectedImage: $profileImage)
         }
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
+#Preview {
+    SettingsView()
 }

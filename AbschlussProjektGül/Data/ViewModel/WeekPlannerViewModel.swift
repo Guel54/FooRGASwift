@@ -1,7 +1,6 @@
 import SwiftUI
 import SwiftData
 
-
 @MainActor
 class WeekPlannerViewModel: ObservableObject {
     @Published var weekPlan: [WeekPlan] = []
@@ -40,6 +39,13 @@ class WeekPlannerViewModel: ObservableObject {
 
         // Sortiere die Pläne nach Datum
         weekPlan.sort { $0.date < $1.date }
+    }
+
+    // Methode zum Löschen eines Wochenplans
+    func deleteWeekPlan(_ plan: WeekPlan) {
+        if let index = weekPlan.firstIndex(where: { $0.id == plan.id }) {
+            weekPlan.remove(at: index)
+        }
     }
 
     // Hilfsfunktion zum Berechnen des Wochentags

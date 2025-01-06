@@ -1,21 +1,15 @@
-//
-//  HeaderView.swift
-//  ProjektWoche2
-//
-//  Created by Saleh Eidani Alizadeh on 27.11.24.
-//
-
 import SwiftUI
 
 struct HeaderView: View {
     var body: some View {
-        Text("Willkommen in der Rezept-App")
-            .font(.largeTitle)
-            .bold()
-            .padding()
+        Image("header")
+            .resizable()
+            .aspectRatio(contentMode: .fill) // Füllt den gesamten Bereich
+            .frame(width: 400, height: 170)
+            .clipped() // Beschneidet das Bild
+
     }
 }
-
 
 #Preview {
     HeaderView()

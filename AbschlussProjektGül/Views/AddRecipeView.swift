@@ -12,7 +12,7 @@ struct AddRecipeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.systemGray6)
+                Color(.salbeigrün)
                     .edgesIgnoringSafeArea(.all)
                 
                 ScrollView {
@@ -20,35 +20,42 @@ struct AddRecipeView: View {
                         Text("Rezept erstellen")
                             .font(.largeTitle)
                             .bold()
-                            .foregroundColor(.pink)
+                            .foregroundColor(.dunkelGrün)
                             .padding(.horizontal)
-
+                        
                         VStack(spacing: 15) {
                             TextField("Rezepttitel", text: $viewModel.title)
                                 .padding()
                                 .background(Color.white)
                                 .cornerRadius(10)
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
-                            
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                )
                             TextEditor(text: $viewModel.description)
                                 .frame(height: 100)
                                 .padding()
                                 .background(Color.white)
                                 .cornerRadius(10)
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
-
+                            
                             TextField("Kochzeit (z.B. 1h 30min)", text: $cookTime)
                                 .padding()
                                 .background(Color.white)
                                 .cornerRadius(10)
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                )
                         }
                         .padding(.horizontal)
-
+                        
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Zutaten")
                                 .font(.headline)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.dunkelGrün)
                             
                             HStack {
                                 TextField("Neue Zutat hinzufügen", text: $newIngredient)
@@ -56,7 +63,10 @@ struct AddRecipeView: View {
                                     .background(Color.white)
                                     .cornerRadius(10)
                                     .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
-                                
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.dunkelGrün, lineWidth: 1)
+                                    )
                                 Button(action: {
                                     if !newIngredient.isEmpty {
                                         ingredients.append(newIngredient)
@@ -64,8 +74,13 @@ struct AddRecipeView: View {
                                     }
                                 }) {
                                     Image(systemName: "plus.circle.fill")
-                                        .foregroundColor(.pink)
+                                        .foregroundColor(Color("dunkelGelb"))
                                         .font(.title2)
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.gray, lineWidth: 2)
+                                                
+                                        )
                                 }
                             }
                             
@@ -77,7 +92,7 @@ struct AddRecipeView: View {
                                         ingredients.removeAll { $0 == ingredient }
                                     }) {
                                         Image(systemName: "trash")
-                                            .foregroundColor(.red)
+                                            .foregroundColor(Color("dunkelGrün"))
                                     }
                                 }
                                 .padding(8)
@@ -86,7 +101,7 @@ struct AddRecipeView: View {
                             }
                         }
                         .padding(.horizontal)
-
+                        
                         Button(action: {
                             viewModel.addRecipe()
                             showRecipeList = true
@@ -95,12 +110,45 @@ struct AddRecipeView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.pink)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.dunkelGrün, lineWidth: 1)
+                                )
+                                .background(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color("olivegrün"),
+                                            Color("dunkelGrün"),
+                                            Color("Salbeigrün")
+                                        ]),
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
                                 .cornerRadius(10)
                         }
                         .padding(.horizontal)
                     }
-                    .padding(.vertical)
+                }
+                
+                // Floating Action Button
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showRecipeList = true
+                        }) {
+                            Image(systemName: "fork.knife")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color("dunkelGelb"))
+                                .clipShape(Circle())
+                                .shadow(color: .gray.opacity(0.4), radius: 4, x: 0, y: 2)
+                        }
+                        .padding()
+                    }
                 }
                 
                 NavigationLink(

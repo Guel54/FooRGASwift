@@ -1,9 +1,4 @@
-//
-//  AddRecipeViewModel.swift
-//  KopieTesting
-//
-//  Created by Gül Köse on 15.12.24.
-//
+
 
 import SwiftUI
 import FirebaseAuth

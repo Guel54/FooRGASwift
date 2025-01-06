@@ -39,6 +39,7 @@ struct HomeView: View {
                             ForEach(recipeViewModel.randomMeals) { meal in
                                 NavigationLink(destination: DetailView(meal: meal)) {
                                     RecipeListRowView(meal: meal)
+                                    
                                 }
                                 .padding(.horizontal)
                             }
@@ -55,6 +56,7 @@ struct HomeView: View {
                     })
                 }
             }
+            .background(Color("Salbeigrün"))
         }
     }
 }
@@ -62,16 +64,26 @@ struct HomeView: View {
 
 struct FloatingActionButton: View {
     let action: () -> Void
+    @State private var isRotating = false
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            withAnimation {
+                isRotating.toggle()
+            }
+            action()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isRotating.toggle()
+            }
+        }) {
             Image(systemName: "arrow.clockwise")
                 .font(.title)
+                .rotationEffect(.degrees(isRotating ? 360 : 0))
                 .frame(width: 60, height: 60)
-                .background(Color.purple)
+                .background(Color.dunkelGelb)
                 .foregroundColor(.white)
                 .clipShape(Circle())
-                .shadow(radius: 5)
+                .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
         }
         .padding()
     }

@@ -4,7 +4,7 @@ import Foundation
 
 @Model
 class WeekPlan: Identifiable {
-        var id = UUID()  
+        var id = UUID()
         var day: String
         var date: Date
         var meal: Meal?
