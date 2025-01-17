@@ -10,20 +10,21 @@ struct StartView: View {
                .edgesIgnoringSafeArea(.all)
            
            // Inhalte im Vordergrund
-           VStack {
+           VStack(spacing: 30) {
+               
                // Titel der App
                Text("Welcome")
                    .font(.largeTitle)
                    .fontWeight(.bold)
                    .foregroundColor(.white)
                    .shadow(radius: 5)
-                   .padding(.top, 50)
+                   .padding(.top, 100)
                
-               Text("")
+               Text(" in der Foorga App")
                    .font(.largeTitle)
                    .foregroundColor(.white)
                    .shadow(radius: 5)
-                   .padding(.top, 50)
+                   
                
                Spacer()
                

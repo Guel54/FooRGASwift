@@ -1,9 +1,4 @@
-//
-//  ImagePicker.swift
-//  KopieTesting
-//
-//  Created by Gül Köse on 02.01.25.
-//
+
 
 import SwiftUI
 import PhotosUI

@@ -41,7 +41,7 @@ struct RecipeListRowView: View {
                                                     .stroke(Color("DarkGrayText"), lineWidth: 2)
                                             )
                                     }
-                                    .offset(x: 150, y: -90)
+                                    .offset(x: 145, y: -90)
                                     
                                     Spacer()
                                     Button {
@@ -49,7 +49,7 @@ struct RecipeListRowView: View {
                                         weekPlannerViewModel.addMealToDate(meal: meal, date: Date())
                                     } label: {
                                         Image(systemName: "calendar.badge.plus")
-                                            .font(.system(size: 30))
+                                            .font(.system(size: 28))
                                             .foregroundColor(Color("hellGrun"))
                                             .padding(10)
                                             .background(Color("dunkelGelb").opacity(0.6))
@@ -59,7 +59,7 @@ struct RecipeListRowView: View {
                                                     .stroke(Color("DarkGrayText"), lineWidth: 2)
                                             )
                                     }
-                                    .offset(x: -5, y: -30)
+                                    .offset(x: -6, y: -30)
                                 }
                             }
                         }

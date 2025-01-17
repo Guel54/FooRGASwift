@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 import FirebaseAuth
 
@@ -7,6 +5,8 @@ class AddRecipeViewModel: ObservableObject {
     @Published var recipes: [AddRecipe] = []
     @Published var title: String = ""
     @Published var description: String = ""
+    @Published var cookTime: String = "" // Neue Eigenschaft für Kochzeit
+    @Published var ingredients: [String] = [] // Neue Eigenschaft für Zutaten
     @Published var isLoading: Bool = false
     @Published var userId: String = ""
 
@@ -46,15 +46,25 @@ class AddRecipeViewModel: ObservableObject {
     }
 
     // Rezept hinzufügen
-    func addRecipe() {
+    func addRecipe(title: String, description: String, cookTime: String, ingredients: [String]) {
         guard !title.isEmpty, !description.isEmpty, !userId.isEmpty else { return }
-        let newRecipe = AddRecipe(userId: userId, title: title, description: description)
+        
+        let newRecipe = AddRecipe(
+            userId: userId,
+            title: title,
+            description: description,
+            cookTime: cookTime,
+            ingredients: ingredients
+        )
+        
         repository.addRecipe(recipe: newRecipe) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     self?.title = ""
                     self?.description = ""
+                    self?.cookTime = "" // Reset cookTime
+                    self?.ingredients = [] // Reset ingredients
                     self?.loadRecipes()
                 case .failure(let error):
                     print("Fehler beim Hinzufügen des Rezepts: \(error.localizedDescription)")

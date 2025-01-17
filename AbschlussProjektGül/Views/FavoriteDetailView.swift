@@ -6,7 +6,7 @@ struct FavoriteDetailView: View {
     var body: some View {
         ZStack {
             // Hintergrundfarbe
-            Color("salbeiGrun")
+            Color("Salbeigrün")
                 .ignoresSafeArea()
             
             ScrollView {
@@ -16,7 +16,7 @@ struct FavoriteDetailView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 400)
+                            .frame(height: 380)
                             .cornerRadius(15)
                             .shadow(radius: 10)
                     } placeholder: {

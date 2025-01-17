@@ -6,7 +6,7 @@ struct HomeView: View {
     @State private var isSearching: Bool = false
     @StateObject private var recipeViewModel = RecipeViewModel()
     //Mutter Viewmodel
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -20,12 +20,12 @@ struct HomeView: View {
                         recipeViewModel.searchRecipes(query: newValue)
                     }
                 }
-
+                
                 NavigationLink(destination: SearchResultsView(searchText: $searchText, viewModel: recipeViewModel), isActive: $isSearching) {
                     EmptyView()
                 }
                 .hidden()
-
+                
                 // Rezeptanzeige
                 ScrollView {
                     LazyVStack {
@@ -37,7 +37,7 @@ struct HomeView: View {
                                 .padding()
                         } else {
                             ForEach(recipeViewModel.randomMeals) { meal in
-                                NavigationLink(destination: DetailView(meal: meal)) {
+                                NavigationLink(destination: HomeDetailView(meal: meal)) {
                                     RecipeListRowView(meal: meal)
                                     
                                 }
@@ -46,10 +46,10 @@ struct HomeView: View {
                         }
                     }
                 }
-                .onAppear {
-                    // Rezepte beim Laden der Ansicht laden
-                    recipeViewModel.fetchMultipleRandomRecipes(count: 10)
-                }
+                //                .onAppear {
+                //                    // Rezepte beim Laden der Ansicht laden
+                //                    recipeViewModel.fetchMultipleRandomRecipes(count: 10)
+                //                }
                 .overlay(alignment: .bottomTrailing) {
                     FloatingActionButton(action: {
                         recipeViewModel.fetchMultipleRandomRecipes(count: 10)
@@ -65,7 +65,7 @@ struct HomeView: View {
 struct FloatingActionButton: View {
     let action: () -> Void
     @State private var isRotating = false
-
+    
     var body: some View {
         Button(action: {
             withAnimation {

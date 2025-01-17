@@ -32,7 +32,7 @@ struct SearchBar: View {
             }
             .padding(.horizontal, 10)
         }
-        .frame(maxWidth: .infinity) 
+        .frame(maxWidth: .infinity)
     }
 }
 

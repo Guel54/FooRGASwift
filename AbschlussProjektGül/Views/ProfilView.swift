@@ -8,7 +8,7 @@ struct ProfileView: View {
     @State private var showSettings = false
     @State private var showImagePicker = false
     @State private var selectedItem: PhotosPickerItem? = nil
-
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -29,21 +29,29 @@ struct ProfileView: View {
                     }
                     
                     Text(username) // Benutzername aus AppStorage
-                        .font(.title2)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.dunkelGrun)
                     
                     Text(userEmail) // E-Mail aus AppStorage
                         .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.7))
+                        .foregroundStyle(Color.dunkelGrun)
                 }
                 .padding(.top, 40)
                 
                 // Button zum Ändern des Profilbilds
                 PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
                     Text("Change Photo")
-                        .foregroundColor(.dunkelGelb)
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [.dunkelGrun, .dunkelGelb, .orange, .dunkelGrun], // Deine Farben hier
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
                         .font(.caption)
+                        .cornerRadius(8)
+                        .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
                 }
                 .onChange(of: selectedItem) { newItem in
                     Task {
@@ -53,7 +61,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-
+                
                 Divider()
                     .background(Color.white.opacity(0.5))
                     .padding(.horizontal, 40)
@@ -73,24 +81,25 @@ struct ProfileView: View {
                         ProfileOptionRow(icon: "info.circle", text: "About")
                     }
                 }
-                .padding(.top, 20)
-
-                Spacer()
-
+                .padding(.top, 10)
+     
                 // Button für die Einstellungen
                 Button(action: {
                     showSettings = true
                 }) {
                     HStack {
                         Image(systemName: "gearshape.fill")
-                            .foregroundColor(.white)
+                            .foregroundStyle(.dunkelGrun)
                         Text("Settings")
-                            .foregroundColor(.white)
+                            .foregroundStyle(.dunkelGrun)
                             .fontWeight(.medium)
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.dunkelGelb)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [Color.dunkelGrun, Color.oliveGrun, Color.salbeiGrun]), startPoint: .leading, endPoint: .trailing)
+                    )
+                    .foregroundStyle(.white)
                     .cornerRadius(8)
                     .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
                 }
@@ -100,19 +109,20 @@ struct ProfileView: View {
                         EmptyView()
                     }
                 )
-
+                
                 Spacer()
             }
             .padding()
             .background(Color("salbeiGrun").ignoresSafeArea())
             .navigationTitle("Profile")
+            
         }
     }
-
+    
     struct ProfileOptionRow: View {
         var icon: String
         var text: String
-
+        
         var body: some View {
             HStack {
                 Image(systemName: icon)
@@ -120,12 +130,13 @@ struct ProfileView: View {
                 Text(text)
                     .fontWeight(.medium)
                     .foregroundColor(.white)
+                    .shadow(radius: 5)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundStyle(.white.opacity(0.5))
             }
             .padding()
-            .background(Color.white.opacity(0.1))
+            .background(Color.dunkelGrun)
             .cornerRadius(8)
             .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
         }

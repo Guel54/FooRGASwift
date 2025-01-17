@@ -7,7 +7,7 @@ struct SettingsView: View {
         NavigationView {
             List {
                 // Account Section
-                Section(header: Text("Account").foregroundStyle(Color("dunkelGrun"))) {
+                Section(header: Text("Account").foregroundColor(.dunkelGrun)) {
                     NavigationLink(destination: EditProfileView()) {
                         Label("Edit Profile", systemImage: "person.circle")
                     }
@@ -18,7 +18,7 @@ struct SettingsView: View {
                 .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Support & About Section
-                Section(header: Text("Support & About").foregroundStyle(Color("dunkelGrun"))) {
+                Section(header: Text("Support & About").foregroundColor(.dunkelGrun)) {
                     Label("My Subscription", systemImage: "creditcard")
                     Label("Help & Support", systemImage: "questionmark.circle")
                     Label("Terms and Policies", systemImage: "info.circle")
@@ -26,14 +26,14 @@ struct SettingsView: View {
                 .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Cache & Cellular Section
-                Section(header: Text("Cache & Cellular").foregroundStyle(Color("dunkelGrun"))) {
+                Section(header: Text("Cache & Cellular").foregroundColor(.dunkelGrun)) {
                     Label("Free up Space", systemImage: "trash")
                     Label("Data Saver", systemImage: "arrow.2.squarepath")
                 }
                 .listRowBackground(Color("salbeiGrun").opacity(0.2))
                 
                 // Actions Section
-                Section(header: Text("Actions").foregroundStyle(Color("dunkelGrun"))) {
+                Section(header: Text("Actions").foregroundColor(.dunkelGrun)) {
                     Label("Report a Problem", systemImage: "exclamationmark.bubble")
                     Label("Add Account", systemImage: "person.badge.plus")
                     Label("Log Out", systemImage: "arrowshape.turn.up.left")
@@ -43,7 +43,7 @@ struct SettingsView: View {
             .scrollContentBackground(.hidden) // Verhindert, dass der Hintergrund der Liste standardmäßig weiß ist
             .background(Color("salbeiGrun").ignoresSafeArea())
             .navigationTitle("Settings")
-            .foregroundColor(.dunkelGelb)
+            .foregroundStyle(.dunkelGelb)
         }
     }
 }
@@ -106,14 +106,14 @@ struct EditProfileView: View {
             }
             
             // Persönliche Informationen
-            Section(header: Text("Personal Information").foregroundColor(.white)) {
+            Section(header: Text("Personal Information").foregroundStyle(.black)) {
                 TextField("Name", text: $username)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.black)
                 TextField("Email", text: $userEmail)
                     .keyboardType(.emailAddress)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.black)
                 SecureField("Password", text: $password)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.black)
                 DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
                 Picker("Country/Region", selection: $selectedCountry) {
                     ForEach(countries, id: \.self) { country in
@@ -132,8 +132,10 @@ struct EditProfileView: View {
                     Text("Save Changes")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.dunkelGelb)
-                        .foregroundColor(.white)
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [Color.dunkelGrun, Color.oliveGrun, Color.salbeiGrun]), startPoint: .leading, endPoint: .trailing)
+                        )
+                        .foregroundStyle(.dunkelGrun)
                         .cornerRadius(8)
                         .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 5)
                 }

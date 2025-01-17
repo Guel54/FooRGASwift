@@ -4,9 +4,9 @@ import FirebaseAuth
 
 struct AddRecipeView: View {
     @StateObject private var viewModel = AddRecipeViewModel()
+    @State private var ingredients: [String] = []
     @State private var cookTime: String = ""
     @State private var newIngredient: String = ""
-    @State private var ingredients: [String] = []
     @State private var showRecipeList = false
 
     var body: some View {
@@ -31,7 +31,7 @@ struct AddRecipeView: View {
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("dunkelGrun"), lineWidth: 1)
+                                        .stroke(Color.dunkelGrun, lineWidth: 1)
                                 )
                             TextEditor(text: $viewModel.description)
                                 .frame(height: 100)
@@ -47,7 +47,7 @@ struct AddRecipeView: View {
                                 .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("dunkelGrun"), lineWidth: 1)
+                                        .stroke(Color.dunkelGrun, lineWidth: 1)
                                 )
                         }
                         .padding(.horizontal)
@@ -103,7 +103,12 @@ struct AddRecipeView: View {
                         .padding(.horizontal)
                         
                         Button(action: {
-                            viewModel.addRecipe()
+                            viewModel.addRecipe(
+                                title: viewModel.title,
+                                description: viewModel.description,
+                                cookTime: cookTime,
+                                ingredients: ingredients
+                            )
                             showRecipeList = true
                         }) {
                             Text("Rezept hinzufügen")
