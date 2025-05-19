@@ -25,6 +25,25 @@ struct FavoriteDetailView: View {
                             .scaleEffect(1.5)
                     }
                     
+                    
+                    
+                    // YouTube Button
+                    if let youtubeURL = meal.strYoutube, !youtubeURL.isEmpty {
+                        Link(destination: URL(string: youtubeURL)!) {
+                            HStack {
+                                Image(systemName: "play.circle.fill")
+                                    .foregroundColor(.red)
+                                    .font(.largeTitle)
+                            }
+                            .padding()
+                            .background(Color.clear)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        }
+                        .padding(.bottom, 10)
+                    }
+                }
+                    
                     // Titel der Mahlzeit
                     Text(meal.name)
                         .font(.largeTitle)
@@ -222,7 +241,7 @@ struct FavoriteDetailView: View {
             
         }
     }
-}
+
 #Preview {
     FavoriteDetailView(meal: Meal(id: "123", name: "Spaghetti Carbonara", image: "https://example.com/spaghetti.jpg", beschreibung: "Leckere Spaghetti mit einer cremigen Carbonara-Sauce.", strYoutube: ""))
 }
