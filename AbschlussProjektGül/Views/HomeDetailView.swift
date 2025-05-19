@@ -44,6 +44,24 @@ struct HomeDetailView: View {
                         .foregroundColor(Color("dunkelGelb"))
                         .padding(.top, 1)
                     
+                    // YouTube Button
+                    if let youtubeURL = meal.strYoutube, !youtubeURL.isEmpty {
+                        Link(destination: URL(string: youtubeURL)!) {
+                            HStack {
+                                Image(systemName: "play.circle.fill")
+                                    .foregroundColor(.red)
+                                    .font(.largeTitle)
+                            }
+                            .padding()
+                            .background(Color.clear)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        }
+                        .padding(.bottom, 10)
+                    }
+                }
+                    
+                    
                     // Zutatenliste mit Mengenangaben
                     
                     VStack(alignment: .leading) {
@@ -137,9 +155,9 @@ struct HomeDetailView: View {
             }
         }
     }
-}
+
 struct HomeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeDetailView(meal: Meal(id: "123", name: "Spaghetti Carbonara", image: "https://example.com/spaghetti.jpg", beschreibung: "Leckere Spaghetti mit einer cremigen Carbonara-Sauce."))
+        HomeDetailView(meal: Meal(id: "123", name: "Spaghetti Carbonara", image: "https://example.com/spaghetti.jpg", beschreibung: "Leckere Spaghetti mit einer cremigen Carbonara-Sauce.", strYoutube: ""))
     }
 }

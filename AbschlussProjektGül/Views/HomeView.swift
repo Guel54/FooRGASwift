@@ -16,7 +16,7 @@ struct HomeView: View {
                     SearchBar(searchText: $searchText) {
                         isSearching = true
                     }
-                    .onChange(of: searchText) { newValue in
+                    .onChange(of: searchText) { oldValue, newValue in
                         recipeViewModel.searchRecipes(query: newValue)
                     }
                 }
@@ -46,10 +46,10 @@ struct HomeView: View {
                         }
                     }
                 }
-                //                .onAppear {
-                //                    // Rezepte beim Laden der Ansicht laden
-                //                    recipeViewModel.fetchMultipleRandomRecipes(count: 10)
-                //                }
+                                .onAppear {
+                                    // Rezepte beim Laden der Ansicht laden
+                                    recipeViewModel.fetchMultipleRandomRecipes(count: 10)
+                                }
                 .overlay(alignment: .bottomTrailing) {
                     FloatingActionButton(action: {
                         recipeViewModel.fetchMultipleRandomRecipes(count: 10)

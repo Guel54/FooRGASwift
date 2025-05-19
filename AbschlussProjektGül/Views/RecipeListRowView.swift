@@ -114,7 +114,7 @@ struct RecipeListRowView_Previews: PreviewProvider {
             ingredient2: "Wasser",
             ingredient3: "Hefe",
             ingredient4: "Tomatensauce",
-            ingredient5: "Käse"
+            ingredient5: "Käse", strYoutube: ""
         ))
         .environmentObject(WeekPlannerViewModel()) // Beispiel für die Vorschau mit dem ViewModel
         .previewLayout(.sizeThatFits)

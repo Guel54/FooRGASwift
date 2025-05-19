@@ -6,7 +6,7 @@ struct FavoriteDetailView: View {
     var body: some View {
         ZStack {
             // Hintergrundfarbe
-            Color("Salbeigrün")
+            Color("salbeiGrun")
                 .ignoresSafeArea()
             
             ScrollView {
@@ -224,5 +224,5 @@ struct FavoriteDetailView: View {
     }
 }
 #Preview {
-    FavoriteDetailView(meal: Meal(id: "123", name: "Spaghetti Carbonara", image: "https://example.com/spaghetti.jpg", beschreibung: "Leckere Spaghetti mit einer cremigen Carbonara-Sauce."))
+    FavoriteDetailView(meal: Meal(id: "123", name: "Spaghetti Carbonara", image: "https://example.com/spaghetti.jpg", beschreibung: "Leckere Spaghetti mit einer cremigen Carbonara-Sauce.", strYoutube: ""))
 }

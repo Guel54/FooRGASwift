@@ -58,7 +58,7 @@ class Meal: Identifiable, Codable {
     var strMeasure19: String?
     var strMeasure20: String?
     
-    
+    var strYoutube: String?
     
     init(
         id: String,
@@ -107,7 +107,8 @@ class Meal: Identifiable, Codable {
         strMeasure17: String? = nil,
         strMeasure18: String? = nil,
         strMeasure19: String? = nil,
-        strMeasure20: String? = nil
+        strMeasure20: String? = nil,
+        strYoutube: String
     ) {
         self.id = id
         self.name = name
@@ -204,6 +205,7 @@ class Meal: Identifiable, Codable {
         case strMeasure20 = "strMeasure20"
         
         case isFavorite
+        case strYoutube
     }
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -254,6 +256,7 @@ class Meal: Identifiable, Codable {
         self.strMeasure18 = try? container.decode(String.self, forKey: .strMeasure18)
         self.strMeasure19 = try? container.decode(String.self, forKey: .strMeasure19)
         self.strMeasure20 = try? container.decode(String.self, forKey: .strMeasure20)
+        self.strYoutube = try? container.decode(String.self, forKey: .strYoutube)
         
     }
     func encode(to encoder: Encoder) throws {
@@ -306,6 +309,7 @@ class Meal: Identifiable, Codable {
         try? container.encode(strMeasure18, forKey: .strMeasure18)
         try? container.encode(strMeasure19, forKey: .strMeasure19)
         try? container.encode(strMeasure20, forKey: .strMeasure20)
+        try? container.encode(strYoutube, forKey: .strYoutube)
     }
 }
 

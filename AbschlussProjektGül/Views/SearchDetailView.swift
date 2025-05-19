@@ -27,6 +27,24 @@ struct SearchDetailView: View {
                         }
                     }
                     
+                    // YouTube Button
+                    if let youtubeURL = meal.strYoutube, !youtubeURL.isEmpty {
+                        Link(destination: URL(string: youtubeURL)!) {
+                            HStack {
+                                Image(systemName: "play.circle.fill")
+                                    .foregroundColor(.red)
+                                    .font(.largeTitle)
+                            }
+                            .padding()
+                            .background(Color.clear)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                        }
+                        .padding(.bottom, 10)
+                    }
+                }
+                    
+                    
                     // Rezeptname
                     Text(meal.name ?? "Unbekannt")
                         .font(.title)
@@ -225,7 +243,7 @@ struct SearchDetailView: View {
             }
         }
     }
-}
+
 
 struct SearchDetailView_Previews: PreviewProvider {
     static var previews: some View {
@@ -233,7 +251,7 @@ struct SearchDetailView_Previews: PreviewProvider {
             id: "1",
             name: "Pizza",
             image: "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg",
-            beschreibung: "Ein leckeres italienisches Gericht mit Tomatensauce, Käse und verschiedenen Toppings! Perfekt für ein schnelles Abendessen oder als Teil einer Party."
+            beschreibung: "Ein leckeres italienisches Gericht mit Tomatensauce, Käse und verschiedenen Toppings! Perfekt für ein schnelles Abendessen oder als Teil einer Party.", strYoutube: ""
         ))
     }
 }

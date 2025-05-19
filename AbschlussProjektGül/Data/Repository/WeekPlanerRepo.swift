@@ -44,7 +44,8 @@ class WeekPlannerRepository {
                     ingredient17: meal.strMeasure17,
                     ingredient18: meal.strMeasure18,
                     ingredient19: meal.strMeasure19,
-                    ingredient20: meal.strMeasure20
+                    ingredient20: meal.strMeasure20,
+                    strYoutube: meal.strYoutube ?? ""
                 )
             }
         }
